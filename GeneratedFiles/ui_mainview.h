@@ -21,8 +21,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
@@ -35,7 +33,7 @@ class Ui_MainView
 {
 public:
     QWidget *centralWidget;
-    QWidget *layoutWidget;
+    QGridLayout *gridLayout_2;
     QHBoxLayout *horizontalLayout;
     QGroupBox *filterBox;
     QVBoxLayout *verticalLayout_3;
@@ -57,8 +55,6 @@ public:
     QGroupBox *listBox;
     QGridLayout *gridLayout;
     QListView *listView;
-    QMenuBar *menuBar;
-    QMenu *menuCuteCliuent;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -66,18 +62,18 @@ public:
     {
         if (MainView->objectName().isEmpty())
             MainView->setObjectName(QStringLiteral("MainView"));
-        MainView->resize(1154, 753);
+        MainView->resize(1085, 714);
+        MainView->setMaximumSize(QSize(2560, 1440));
         centralWidget = new QWidget(MainView);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        layoutWidget = new QWidget(centralWidget);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(9, 9, 1131, 681));
-        horizontalLayout = new QHBoxLayout(layoutWidget);
+        gridLayout_2 = new QGridLayout(centralWidget);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        filterBox = new QGroupBox(layoutWidget);
+        filterBox = new QGroupBox(centralWidget);
         filterBox->setObjectName(QStringLiteral("filterBox"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
@@ -182,7 +178,7 @@ public:
 
         horizontalLayout->addWidget(filterBox);
 
-        listBox = new QGroupBox(layoutWidget);
+        listBox = new QGroupBox(centralWidget);
         listBox->setObjectName(QStringLiteral("listBox"));
         gridLayout = new QGridLayout(listBox);
         gridLayout->setSpacing(6);
@@ -197,13 +193,10 @@ public:
 
         horizontalLayout->addWidget(listBox);
 
+
+        gridLayout_2->addLayout(horizontalLayout, 0, 0, 1, 1);
+
         MainView->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MainView);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1154, 21));
-        menuCuteCliuent = new QMenu(menuBar);
-        menuCuteCliuent->setObjectName(QStringLiteral("menuCuteCliuent"));
-        MainView->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainView);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainView->addToolBar(Qt::TopToolBarArea, mainToolBar);
@@ -225,8 +218,6 @@ public:
         QWidget::setTabOrder(digitsFilter, decimalsFilter);
         QWidget::setTabOrder(decimalsFilter, searchBtn);
 
-        menuBar->addAction(menuCuteCliuent->menuAction());
-
         retranslateUi(MainView);
 
         QMetaObject::connectSlotsByName(MainView);
@@ -234,7 +225,7 @@ public:
 
     void retranslateUi(QMainWindow *MainView)
     {
-        MainView->setWindowTitle(QApplication::translate("MainView", "MainView", nullptr));
+        MainView->setWindowTitle(QApplication::translate("MainView", "CuteClient", nullptr));
         filterBox->setTitle(QApplication::translate("MainView", "Filters", nullptr));
         dateLabel->setText(QApplication::translate("MainView", "Date", nullptr));
         idLabel->setText(QApplication::translate("MainView", "ExternalID", nullptr));
@@ -244,7 +235,6 @@ public:
         decLabel->setText(QApplication::translate("MainView", "Decimals", nullptr));
         searchBtn->setText(QApplication::translate("MainView", "Search", nullptr));
         listBox->setTitle(QApplication::translate("MainView", "    Date                    ExternalID                                    Number               Constant        Digits              Decimals", nullptr));
-        menuCuteCliuent->setTitle(QApplication::translate("MainView", "CuteClient", nullptr));
     } // retranslateUi
 
 };
